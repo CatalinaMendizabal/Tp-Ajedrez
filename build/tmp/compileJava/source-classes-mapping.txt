@@ -1,0 +1,16 @@
+australchess/cli/ParsedPosition.java
+ australchess.cli.ParsedPosition
+australchess/cli/BoardPosition.java
+ australchess.cli.BoardPosition
+australchess/cli/BoardPrinter.java
+ australchess.cli.BoardPrinter
+australchess/cli/SomethingClass.java
+ australchess.cli.SomethingClass
+australchess/cli/DefaultSomethingClass.java
+ australchess.cli.DefaultSomethingClass
+australchess/cli/ParsedPositionParser.java
+ australchess.cli.ParsedPositionParser
+australchess/cli/DefaultBoardPrinter.java
+ australchess.cli.DefaultBoardPrinter
+australchess/cli/App.java
+ australchess.cli.App
