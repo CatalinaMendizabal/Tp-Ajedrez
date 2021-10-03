@@ -1,2 +1,0 @@
-australchess/cli/ParsedPositionParserTest.java
- australchess.cli.ParsedPositionParserTest
