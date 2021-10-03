@@ -1,12 +1,33 @@
 package australchess.cli;
 
-import lombok.Data;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import australchess.piece.Piece;
 
-@RequiredArgsConstructor
-public @Data class BoardPosition {
-    private final @Getter Character pieceId;
-    private final @Getter Integer number;
-    private final @Getter Character letter;
+
+public class BoardPosition {
+    private Piece piece;
+    private final Integer number;
+    private final Character letter;
+
+    public BoardPosition(Piece piece, Integer number, Character letter) {
+        this.piece = piece;
+        this.number = number;
+        this.letter = letter;
+    }
+
+    public Piece getPiece() {
+        return piece;
+    }
+
+    public Integer getNumber() {
+        return number;
+    }
+
+    public Character getLetter() {
+        return letter;
+    }
+
+    public void setPiece(Piece piece) {
+        this.piece = piece;
+    }
+
 }

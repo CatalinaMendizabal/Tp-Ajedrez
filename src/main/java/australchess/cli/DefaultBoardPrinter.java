@@ -1,5 +1,7 @@
 package australchess.cli;
 
+import australchess.piece.Piece;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -26,6 +28,6 @@ public class DefaultBoardPrinter implements BoardPrinter {
     }
 
     private static Optional<Character> findPiece(Character file, Integer rank, List<BoardPosition> positions) {
-        return positions.stream().filter(p -> p.getLetter() == file && p.getNumber().equals(rank)).findFirst().map(BoardPosition::getPieceId);
+        return positions.stream().filter(p -> p.getLetter() == file && p.getNumber().equals(rank)).findFirst().map(BoardPosition::getPiece).map(Piece::getPieceId);
     }
 }

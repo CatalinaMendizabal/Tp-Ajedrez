@@ -1,5 +1,4 @@
 package australchess.cli;
-
 import com.github.lalyos.jfiglet.FigletFont;
 
 import java.io.IOException;
@@ -8,44 +7,40 @@ import java.util.Scanner;
 // Starter CLI interface for the chess game, modify as you wish.
 // TODO: Fill in!
 public class App {
+
+    final static BoardPrinter boardPrinter = new DefaultBoardPrinter();
+    private static ChessGame chessGame;
+
     public static void main(String[] args) throws IOException {
-        final BoardPrinter boardPrinter = new DefaultBoardPrinter();
 
         printHeader();
-        final var firstPlayerId = askForString("Name of player that moves white: ");
-        final var secondPlayerId = askForString("Name of player that moves black: ");
+        final var whitePlayerId = askForString("Name of player that moves white: ");
+        final var blackPlayerId = askForString("Name of player that moves black: ");
+        chessGame = new ChessGame(whitePlayerId, blackPlayerId);
         System.out.println();
         System.out.println();
 
-        while(shouldContinue()) {
+        while (ChessGame.shouldContinue()) {
             printCurrentPlayerTurn();
             System.out.println();
-            printBoard(boardPrinter);
+            printBoard();
             final var positionFrom = askForPosition("Enter position of the piece you want to move");
             final var positionTo = askForPosition("Enter position of cell you want to move it to");
-            move(positionFrom, positionTo);
+            chessGame.move(positionFrom, positionTo);
             System.out.println();
             System.out.println();
         }
     }
 
-    private static void printBoard(BoardPrinter boardPrinter) {
-        // TODO: provide the board somehow.
-        var positions = new DefaultSomethingClass().getPiecePositions();
-        var boardAsString = boardPrinter.print(positions);
+    private static void printBoard() {
+        var boardAsString = boardPrinter.print(chessGame.getBoard().getPositions());
         System.out.println(boardAsString);
     }
 
-    private static void move(ParsedPosition from, ParsedPosition to) {
-        // TODO implement!
-    }
+    public static Player playerToMove() { return chessGame.getCurrentPlayer(); }
 
-    private static String playerToMove() {
-        return "Someone"; //TODO Implement!
-    }
-
-    private static boolean shouldContinue() {
-        return true; //TODO Implement!
+    public static void printCurrentPlayerTurn() {
+        System.out.println("It's " + playerToMove().getColor() + " player turn!");
     }
 
     private static ParsedPosition askForPosition(String question) {
@@ -55,10 +50,6 @@ public class App {
         var positionAsString = scanner.nextLine();
         return ParsedPositionParser.parse(positionAsString)
                 .orElseGet(() -> askForPosition("The position " + positionAsString + " is invalid. Please enter a new one"));
-    }
-
-    private static void printCurrentPlayerTurn() {
-        System.out.println("It's " + playerToMove() + " turn!");
     }
 
     private static String askForString(String question) {

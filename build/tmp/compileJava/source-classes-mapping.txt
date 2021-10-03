@@ -1,16 +1,66 @@
-australchess/cli/ParsedPosition.java
- australchess.cli.ParsedPosition
-australchess/cli/BoardPosition.java
- australchess.cli.BoardPosition
-australchess/cli/BoardPrinter.java
- australchess.cli.BoardPrinter
-australchess/cli/SomethingClass.java
- australchess.cli.SomethingClass
-australchess/cli/DefaultSomethingClass.java
- australchess.cli.DefaultSomethingClass
+australchess/cli/GameStatus.java
+ australchess.cli.GameStatus
+australchess/piece/Queen.java
+ australchess.piece.Queen
+australchess/piece/Move.java
+ australchess.piece.Move
+australchess/validator/ValidCapture.java
+ australchess.validator.ValidCapture
+australchess/factory/BoardFactory.java
+ australchess.factory.BoardFactory
+australchess/piece/Bishop.java
+ australchess.piece.Bishop
 australchess/cli/ParsedPositionParser.java
  australchess.cli.ParsedPositionParser
+australchess/factory/LargeBoardFactory.java
+ australchess.factory.LargeBoardFactory
+australchess/validator/PawnMove.java
+ australchess.validator.PawnMove
+australchess/piece/Knight.java
+ australchess.piece.Knight
+australchess/piece/PieceType.java
+ australchess.piece.PieceType
+australchess/factory/DefaultPieceSetFactory.java
+ australchess.factory.DefaultPieceSetFactory
+australchess/cli/ParsedPosition.java
+ australchess.cli.ParsedPosition
+australchess/piece/PieceColor.java
+ australchess.piece.PieceColor
+australchess/validator/OtherPieces.java
+ australchess.validator.OtherPieces
+australchess/validator/MovementValidator.java
+ australchess.validator.MovementValidator
+australchess/cli/Board.java
+ australchess.cli.Board
+australchess/factory/PieceSetFactory.java
+ australchess.factory.PieceSetFactory
+australchess/piece/MovingCriteria.java
+ australchess.piece.MovingCriteria
+australchess/cli/Player.java
+ australchess.cli.Player
+australchess/cli/BoardPrinter.java
+ australchess.cli.BoardPrinter
+australchess/validator/BoardLimit.java
+ australchess.validator.BoardLimit
+australchess/validator/CheckRule.java
+ australchess.validator.CheckRule
 australchess/cli/DefaultBoardPrinter.java
  australchess.cli.DefaultBoardPrinter
+australchess/validator/FreeRoute.java
+ australchess.validator.FreeRoute
+australchess/piece/King.java
+ australchess.piece.King
 australchess/cli/App.java
  australchess.cli.App
+australchess/piece/Piece.java
+ australchess.piece.Piece
+australchess/cli/BoardPosition.java
+ australchess.cli.BoardPosition
+australchess/piece/Pawn.java
+ australchess.piece.Pawn
+australchess/piece/Rook.java
+ australchess.piece.Rook
+australchess/cli/ChessGame.java
+ australchess.cli.ChessGame
+australchess/factory/NormalBoardFactory.java
+ australchess.factory.NormalBoardFactory
