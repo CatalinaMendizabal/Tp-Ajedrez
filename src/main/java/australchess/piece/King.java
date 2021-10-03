@@ -1,19 +1,19 @@
 package australchess.piece;
 
-import australchess.cli.BoardPosition;
+import australchess.generator.KingMoveGenerator;
 
 public class King extends Piece {
 
-    public King(PieceColor color) {
+    boolean moved;
 
+    public King(PieceColor color) {
         super(color, PieceType.KING);
         this.pieceId = 'K';
-
+        movementGenerator = new KingMoveGenerator();
+        moved = false;
     }
 
+    public void setMoved(boolean moved) { this.moved = moved; }
 
-    @Override
-    public boolean isLegalMovement(Move move) {
-        return false;
-    }
+
 }

@@ -2,9 +2,9 @@ package australchess.cli;
 
 import australchess.factory.*;
 import australchess.piece.Move;
+import australchess.piece.Movement;
 import australchess.piece.Piece;
 import australchess.piece.PieceColor;
-import lombok.Getter;
 
 public class ChessGame {
 
@@ -13,6 +13,7 @@ public class ChessGame {
     final Board board;
     final Player[] players = new Player[2];
     int currentPlaying = 0;
+    static GameStatus gameStatus;
     final Piece[] whitePieceSet = pieceSetFactory.makePieceSet(PieceColor.WHITE);
     final Piece[] blackPieceSet = pieceSetFactory.makePieceSet(PieceColor.BLACK);
 
@@ -20,6 +21,7 @@ public class ChessGame {
         players[0]  = new Player(whitePlayerId, PieceColor.WHITE, whitePieceSet);
         players[1] = new Player(blackPlayerId, PieceColor.BLACK, blackPieceSet);
         board = boardFactory.createBoard(whitePieceSet, blackPieceSet);
+        gameStatus = GameStatus.ON_PROGRESS;
     }
 
     public Board getBoard() { return board; }
@@ -31,26 +33,29 @@ public class ChessGame {
     public Player getCurrentPlayer() { return players[currentPlaying]; }
 
     public void move(ParsedPosition from, ParsedPosition to) {
-        Move movement;
+        Move move;
         try {
-            movement = new Move(from.boardLimitPosition(board), to.boardLimitPosition(board));
-            board.movePiece(getCurrentPlayer().getColor(), movement);
+            move = new Move(from.boardLimitPosition(board), to.boardLimitPosition(board));
+            Movement movement = board.movePiece(getCurrentPlayer().getColor(), move);
+            gameStatus = movement.getGameStatus();
             nextPlayer();
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-
-        //TODO imlement check detection
     }
 
     private void nextPlayer() {
-        currentPlaying ++;
-        if (currentPlaying == players.length) currentPlaying = 0;
+        if (!(gameStatus.equals(GameStatus.BLACK_IN_CHECK_MATED) || gameStatus.equals(GameStatus.WHITE_IN_CHECK_MATED))) {
+            currentPlaying ++;
+            if (currentPlaying == players.length) currentPlaying = 0;
+        }
     }
 
-    /*
-    1. need to check player's turn
-    2. need to check game status
-    3. Board selection
-     */
+    public Piece[] getWhitePieceSet() {
+        return whitePieceSet;
+    }
+
+    public Piece[] getBlackPieceSet() {
+        return blackPieceSet;
+    }
 }
