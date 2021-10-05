@@ -12,10 +12,8 @@ public class NormalBoardFactory implements BoardFactory {
     @Override
     public Board createBoard(Piece[] whitePieceSet, Piece[] blackPieceSet) {
         List<BoardPosition> positions = new ArrayList<>(64);
-        int i = 0;
-        setPiecesOnBoard(whitePieceSet, positions, i, 'a', 'b');
-        i = 0;
-        setPiecesOnBoard(blackPieceSet, positions, i, 'h', 'g');
+        setPiecesOnBoard(whitePieceSet, positions, 'a', 'b');
+        setPiecesOnBoard(blackPieceSet, positions,'h', 'g');
 
         for (char letter = 'c'; letter <= 'f'; letter++) {
             for (int number = 1; number <= 8; number++) {
@@ -25,13 +23,14 @@ public class NormalBoardFactory implements BoardFactory {
         return new Board(positions);
     }
 
-    private void setPiecesOnBoard(Piece[] blackPieceSet, List<BoardPosition> positions, int i, Character row1, Character row2) {
+    private void setPiecesOnBoard(Piece[] colorPieceSet, List<BoardPosition> positions, Character row1, Character row2) {
+        int i = 0;
         for (int number = 1; number <= 8; number++) {
-            positions.add(new BoardPosition(blackPieceSet[i], number, row2));
+            positions.add(new BoardPosition(colorPieceSet[i], number, row2));
             i++;
         }
         for (int number = 1; number <= 8; number++) {
-            positions.add(new BoardPosition(blackPieceSet[i], number, row1));
+            positions.add(new BoardPosition(colorPieceSet[i], number, row1));
             i++;
         }
     }

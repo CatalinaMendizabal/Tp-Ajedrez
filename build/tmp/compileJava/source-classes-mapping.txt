@@ -1,43 +1,33 @@
-australchess/cli/GameStatus.java
- australchess.cli.GameStatus
-australchess/piece/PieceColor.java
- australchess.piece.PieceColor
-australchess/piece/PieceType.java
- australchess.piece.PieceType
-australchess/cli/DefaultBoardPrinter.java
- australchess.cli.DefaultBoardPrinter
-australchess/factory/PieceSetFactory.java
- australchess.factory.PieceSetFactory
 australchess/cli/ParsedPositionParser.java
  australchess.cli.ParsedPositionParser
-australchess/factory/DefaultPieceSetFactory.java
- australchess.factory.DefaultPieceSetFactory
+australchess/piece/PieceColor.java
+ australchess.piece.PieceColor
 australchess/cli/BoardPrinter.java
  australchess.cli.BoardPrinter
+australchess/factory/PieceSetFactory.java
+ australchess.factory.PieceSetFactory
+australchess/piece/PieceType.java
+ australchess.piece.PieceType
+australchess/validator/KingMoveGenerator.java
+ australchess.validator.KingMoveGenerator
 australchess/piece/Queen.java
  australchess.piece.Queen
 australchess/piece/Move.java
  australchess.piece.Move
-australchess/piece/Movement.java
- australchess.piece.Movement
 australchess/validator/ValidCapture.java
  australchess.validator.ValidCapture
 australchess/validator/RookFreeRoute.java
  australchess.validator.RookFreeRoute
 australchess/factory/BoardFactory.java
  australchess.factory.BoardFactory
-australchess/generator/RookMoveGenerator.java
- australchess.generator.RookMoveGenerator
-australchess/generator/PawnMoveGenerator.java
- australchess.generator.PawnMoveGenerator
 australchess/piece/Bishop.java
  australchess.piece.Bishop
-australchess/factory/LargeBoardFactory.java
- australchess.factory.LargeBoardFactory
-australchess/generator/KingMoveGenerator.java
- australchess.generator.KingMoveGenerator
+australchess/validator/QueenFreeRoute.java
+ australchess.validator.QueenFreeRoute
 australchess/piece/Knight.java
  australchess.piece.Knight
+australchess/factory/DefaultPieceSetFactory.java
+ australchess.factory.DefaultPieceSetFactory
 australchess/cli/ParsedPosition.java
  australchess.cli.ParsedPosition
 australchess/validator/PawnFreeRoute.java
@@ -50,20 +40,18 @@ australchess/validator/BishopFreeRoute.java
  australchess.validator.BishopFreeRoute
 australchess/cli/Board.java
  australchess.cli.Board
-australchess/generator/QueenMoveGenerator.java
- australchess.generator.QueenMoveGenerator
+australchess/validator/MovementGenerator.java
+ australchess.validator.MovementGenerator
 australchess/cli/App.java
  australchess.cli.App
+australchess/piece/MovingCriteria.java
+ australchess.piece.MovingCriteria
 australchess/cli/Player.java
  australchess.cli.Player
 australchess/cli/DefaultCheckDetector.java
  australchess.cli.DefaultCheckDetector
-australchess/piece/MovingCriteria.java
- australchess.piece.MovingCriteria
 australchess/validator/CheckRule.java
  australchess.validator.CheckRule
-australchess/generator/MovementGenerator.java
- australchess.generator.MovementGenerator
 australchess/cli/ChessGame.java
  australchess.cli.ChessGame
 australchess/validator/FreeRoute.java
@@ -76,11 +64,11 @@ australchess/piece/Piece.java
  australchess.piece.Piece
 australchess/cli/BoardPosition.java
  australchess.cli.BoardPosition
+australchess/validator/TargetBoardPosition.java
+ australchess.validator.TargetBoardPosition
 australchess/piece/Pawn.java
  australchess.piece.Pawn
 australchess/piece/Rook.java
  australchess.piece.Rook
-australchess/generator/BishopMoveGenerator.java
- australchess.generator.BishopMoveGenerator
-australchess/generator/KnightMoveGenerator.java
- australchess.generator.KnightMoveGenerator
+australchess/cli/DefaultBoardPrinter.java
+ australchess.cli.DefaultBoardPrinter

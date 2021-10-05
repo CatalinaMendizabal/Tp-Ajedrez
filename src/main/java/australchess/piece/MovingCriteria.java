@@ -1,5 +1,6 @@
 package australchess.piece;
 
 public interface MovingCriteria {
-    boolean isLegalMovement(Move move);
+    boolean isValidMove(Move move);
+
 }

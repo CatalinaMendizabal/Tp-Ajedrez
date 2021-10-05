@@ -1,6 +1,10 @@
 package australchess.piece;
 
-import australchess.generator.KnightMoveGenerator;
+import australchess.cli.ChessGame;
+import australchess.validator.CheckRule;
+import australchess.validator.TargetBoardPosition;
+
+import java.util.List;
 
 public class Knight extends Piece {
 
@@ -8,8 +12,15 @@ public class Knight extends Piece {
 
         super(color, PieceType.KNIGHT);
         this.pieceId = 'N';
-        movementGenerator = new KnightMoveGenerator();
+        this.validators = List.of(new TargetBoardPosition(), new CheckRule(ChessGame.checkDetector));
 
     }
 
+    @Override
+    public boolean isValidMove(Move move) {
+        int x = Math.abs(move.to.getNumber() - move.from.getNumber());
+        int y = Math.abs(move.to.getLetter() - move.from.getLetter());
+        return x * y == 2;
+    }
 }
+

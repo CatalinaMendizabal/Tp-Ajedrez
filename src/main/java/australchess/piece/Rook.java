@@ -1,6 +1,11 @@
 package australchess.piece;
 
-import australchess.generator.RookMoveGenerator;
+import australchess.cli.ChessGame;
+import australchess.validator.CheckRule;
+import australchess.validator.RookFreeRoute;
+import australchess.validator.TargetBoardPosition;
+
+import java.util.List;
 
 public class Rook extends Piece{
 
@@ -9,11 +14,19 @@ public class Rook extends Piece{
     public Rook(PieceColor color) {
         super(color, PieceType.ROOK);
         this.pieceId = 'R';
-        movementGenerator = new RookMoveGenerator();
+        this.validators = List.of(new RookFreeRoute(), new TargetBoardPosition(), new CheckRule(ChessGame.checkDetector));
+
     }
 
     public void setMoved(boolean moved) {
         this.moved = moved;
     }
 
+    @Override
+    public boolean isValidMove(Move move) {
+        int x = Math.abs(move.to.getNumber() - move.from.getNumber());
+        int y = Math.abs(move.to.getLetter() - move.from.getLetter());
+
+        return (x == 0 && y != 0) || (x != 0 && y == 0);
+    }
 }

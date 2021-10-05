@@ -1,5 +1,7 @@
 package australchess.cli;
 
+import australchess.piece.PieceColor;
+
 public interface CheckDetector {
-    boolean validate(Board boar, String movingColor);
+    boolean isChecked(Board boar, PieceColor movingColor);
 }

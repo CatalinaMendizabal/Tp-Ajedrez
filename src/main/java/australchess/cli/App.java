@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.util.Scanner;
 
 // Starter CLI interface for the chess game, modify as you wish.
-// TODO: Fill in!
 public class App {
 
     final static BoardPrinter boardPrinter = new DefaultBoardPrinter();
@@ -20,7 +19,7 @@ public class App {
         System.out.println();
         System.out.println();
 
-        while (ChessGame.shouldContinue()) {
+        while (chessGame.shouldContinue()) {
             printCurrentPlayerTurn();
             System.out.println();
             printBoard();
@@ -37,7 +36,7 @@ public class App {
         System.out.println(boardAsString);
     }
 
-    public static Player playerToMove() { return chessGame.getCurrentPlayer(); }
+    public static Player playerToMove() { return ChessGame.getCurrentPlayer(); }
 
     public static void printCurrentPlayerTurn() {
         System.out.println("It's " + playerToMove().getColor() + " player turn!");
