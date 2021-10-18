@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Optional;
 
 // Improve or create a new implementation if you like, this is a naive implementation
-public class DefaultBoardPrinter implements BoardPrinter {
+public class DefaultBoardPrinter implements BoardPrinter{
     @Override
     public String print(List<BoardPosition> positions) {
         var files = List.of('h', 'g', 'f', 'e', 'd', 'c', 'b', 'a');

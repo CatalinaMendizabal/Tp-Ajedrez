@@ -13,7 +13,5 @@ public class Move {
 
     public BoardPosition getFrom() { return from; }
 
-    public BoardPosition getTo() {
-        return to;
-    }
+    public BoardPosition getTo() { return to; }
 }

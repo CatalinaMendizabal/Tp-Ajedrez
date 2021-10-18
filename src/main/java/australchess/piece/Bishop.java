@@ -1,8 +1,8 @@
 package australchess.piece;
 
 import australchess.cli.ChessGame;
-import australchess.validator.BishopFreeRoute;
 import australchess.validator.CheckRule;
+import australchess.validator.DiagonalFreeRoute;
 import australchess.validator.TargetBoardPosition;
 
 import java.util.List;
@@ -10,18 +10,17 @@ import java.util.List;
 public class Bishop extends Piece {
 
     public Bishop(PieceColor color) {
-
         super(color, PieceType.BISHOP);
         this.pieceId = 'B';
-        this.validators = List.of(new BishopFreeRoute(), new TargetBoardPosition(), new CheckRule(ChessGame.checkDetector));
+        if (color == PieceColor.BLACK) pieceId = Character.toLowerCase(pieceId);
+        this.validators = List.of(new DiagonalFreeRoute(), new TargetBoardPosition(), new CheckRule(ChessGame.checkDetector));
     }
 
     @Override
     public boolean isValidMove(Move move) {
-        int x = Math.abs(move.to.getNumber() - move.from.getNumber());
-        int y = Math.abs(move.to.getLetter() - move.from.getLetter());
-
-        if (x == 0 & y == 0) return false;
-        return (Math.abs(x) == Math.abs(y));
+        int offsetX = move.to.getNumber() - move.from.getNumber();
+        int offsetY = move.to.getLetter() - move.from.getLetter();
+        if(offsetX == 0 & offsetY == 0) return true;
+        return (Math.abs(offsetX) != Math.abs(offsetY));
     }
 }

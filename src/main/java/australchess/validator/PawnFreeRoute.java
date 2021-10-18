@@ -3,7 +3,7 @@ package australchess.validator;
 import australchess.cli.Board;
 import australchess.piece.Move;
 
-public class PawnFreeRoute implements FreeRoute{
+public class PawnFreeRoute implements MovementValidator{
     @Override
     public boolean validate(Move move, Board board) {
         int dirY = move.getTo().getLetter() > move.getFrom().getLetter() ? 1 : -1;

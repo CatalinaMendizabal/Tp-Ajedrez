@@ -9,17 +9,13 @@ public class ParsedPosition {
         this.letter = letter;
     }
 
-    public Integer getNumber() {
-        return number;
-    }
+    public Integer getNumber() { return number; }
 
-    public Character getLetter() {
-        return letter;
-    }
+    public Character getLetter() { return letter; }
 
-    public BoardPosition boardLimitPosition(Board board) {
+    public BoardPosition toBoardPosition(Board board) {
         for (BoardPosition position : board.getPositions()) {
-            if (position.getLetter().equals(this.getLetter()) && position.getNumber().equals(this.getNumber()))
+            if(position.getLetter().equals(this.getLetter()) && position.getNumber().equals(this.getNumber()))
                 return position;
         }
         throw new RuntimeException("This position is not on the board");

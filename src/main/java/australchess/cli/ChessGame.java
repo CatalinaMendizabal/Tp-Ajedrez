@@ -1,70 +1,64 @@
 package australchess.cli;
 
+import australchess.detector.CheckMateDetector;
+import australchess.detector.DefaultCheckMateDetector;
+import australchess.detector.CheckDetector;
+import australchess.detector.DefaultCheckDetector;
 import australchess.factory.*;
 import australchess.piece.Move;
 import australchess.piece.Piece;
 import australchess.piece.PieceColor;
 
-import java.util.List;
-
 public class ChessGame {
-
+    private static GameStatus gameStatus;
     final BoardFactory boardFactory = new NormalBoardFactory();
     final PieceSetFactory pieceSetFactory = new DefaultPieceSetFactory();
     final Board board;
-    static final Player[] players = new Player[2];
-    static int currentPlaying = 0;
-    final Piece[] whitePieceSet = pieceSetFactory.makePieceSet(PieceColor.WHITE);
-    final Piece[] blackPieceSet = pieceSetFactory.makePieceSet(PieceColor.BLACK);
+    final Player[] players = new Player[2];
+    int currentPlayerIndex = 0;
     public static CheckDetector checkDetector = new DefaultCheckDetector();
+    public static CheckMateDetector checkMateDetector = new DefaultCheckMateDetector();
 
-    public ChessGame(String whitePlayerId, String blackPlayerId) {
-        players[0] = new Player(whitePlayerId, PieceColor.WHITE, whitePieceSet);
-        players[1] = new Player(blackPlayerId, PieceColor.BLACK, blackPieceSet);
-        board = boardFactory.createBoard(whitePieceSet, blackPieceSet);
+    public ChessGame(String whitePlayer, String blackPlayer) {
+        board = boardFactory.createBoard(pieceSetFactory.createPieceSet(PieceColor.WHITE), pieceSetFactory.createPieceSet(PieceColor.BLACK));
+        players[0] = new Player(PieceColor.WHITE, whitePlayer);
+        players[1] = new Player(PieceColor.BLACK, blackPlayer);
+        gameStatus = GameStatus.PLAYING;
     }
 
-    public Board getBoard() {
-        return board;
+    public Player getCurrentPlayer() {
+        return players[currentPlayerIndex];
+    }
+
+    private PieceColor getCurrentPlayerColor() { return getCurrentPlayer().getColor(); }
+
+    public Board getBoard() { return board; }
+
+    public static GameStatus getGameStatus() { return gameStatus; }
+
+    private void nextPlayer() {
+        currentPlayerIndex++;
+        if (currentPlayerIndex == players.length) currentPlayerIndex = 0;
     }
 
     public boolean shouldContinue() {
-        if (checkDetector.isChecked(board, getCurrentPlayer().getColor())) {
-            boolean isCheckmated = true;
-            List<BoardPosition> piecePositions = board.getColorPiecePosition(getCurrentPlayer().getColor());
-            for (BoardPosition piecePosition : piecePositions) {
-                if (piecePosition.getPiece().canMove(board, piecePosition)) {
-                    isCheckmated = false;
-                    break;
-                }
-            }
-            if (isCheckmated) {
-                System.out.printf("%s is checkmated!%n", getCurrentPlayer().getName());
-                return false;
-            }
-            System.out.printf("%s is checked%n", getCurrentPlayer().getName());
-        }
-        return true;
-    }
+        if (checkDetector.isChecked(board, getCurrentPlayerColor())) {
+            gameStatus = GameStatus.PLAYER_CHECKED;
 
-    public static Player getCurrentPlayer() {
-        return players[currentPlaying];
+            boolean checkmated = checkMateDetector.isCheckMated(board, getCurrentPlayerColor());
+            if (checkmated) gameStatus = GameStatus.PLAYER_CHECKMATED;
+        }
+        return gameStatus.equals(GameStatus.PLAYING) || gameStatus.equals(GameStatus.PLAYER_CHECKED);
     }
 
     public void move(ParsedPosition from, ParsedPosition to) {
-        Move move;
+        Move movement;
         try {
-            move = new Move(from.boardLimitPosition(board), to.boardLimitPosition(board));
-            board.move(move, getCurrentPlayer().getColor());
+            movement = new Move(from.toBoardPosition(board), to.toBoardPosition(board));
+            board.move(movement, getCurrentPlayerColor());
             nextPlayer();
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
-
-    private void nextPlayer() {
-        currentPlaying++;
-        if (currentPlaying == players.length) currentPlaying = 0;
-    }
-
 }

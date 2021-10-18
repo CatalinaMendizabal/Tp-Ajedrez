@@ -8,19 +8,18 @@ import java.util.Scanner;
 public class App {
 
     final static BoardPrinter boardPrinter = new DefaultBoardPrinter();
-    private static ChessGame chessGame;
-
+    static ChessGame chessGame;
     public static void main(String[] args) throws IOException {
-
         printHeader();
-        final var whitePlayerId = askForString("Name of player that moves white: ");
-        final var blackPlayerId = askForString("Name of player that moves black: ");
-        chessGame = new ChessGame(whitePlayerId, blackPlayerId);
+        final var whitePlayerName = askForString("Name of player that moves white: ");
+        final var blackPlayerName = askForString("Name of player that moves black: ");
         System.out.println();
         System.out.println();
 
-        while (chessGame.shouldContinue()) {
+        chessGame = new ChessGame(whitePlayerName, blackPlayerName);
+        while(chessGame.shouldContinue()) {
             printCurrentPlayerTurn();
+            System.out.println("Game status: " + ChessGame.getGameStatus());
             System.out.println();
             printBoard();
             final var positionFrom = askForPosition("Enter position of the piece you want to move");
@@ -29,19 +28,18 @@ public class App {
             System.out.println();
             System.out.println();
         }
+        System.out.println("The game is over!");
+        printBoard();
     }
 
     private static void printBoard() {
-        var boardAsString = boardPrinter.print(chessGame.getBoard().getPositions());
+        var board = chessGame.getBoard();
+        var boardAsString = App.boardPrinter.print(board.getPositions());
         System.out.println(boardAsString);
     }
-
-    public static Player playerToMove() { return ChessGame.getCurrentPlayer(); }
-
-    public static void printCurrentPlayerTurn() {
-        System.out.println("It's " + playerToMove().getColor() + " player turn!");
+    private static Player playerToMove() {
+        return chessGame.getCurrentPlayer();
     }
-
     private static ParsedPosition askForPosition(String question) {
         System.out.println(question);
         System.out.print("Enter in format -> (number,letter): ");
@@ -50,13 +48,14 @@ public class App {
         return ParsedPositionParser.parse(positionAsString)
                 .orElseGet(() -> askForPosition("The position " + positionAsString + " is invalid. Please enter a new one"));
     }
-
+    private static void printCurrentPlayerTurn() {
+        System.out.println("It's " + playerToMove().getName() + " turn!");
+    }
     private static String askForString(String question) {
         System.out.println(question);
         var scanner = new Scanner(System.in);
         return scanner.nextLine();
     }
-
     private static void printHeader() throws IOException {
         String header = FigletFont.convertOneLine("AustralChess");
         System.out.println(header);

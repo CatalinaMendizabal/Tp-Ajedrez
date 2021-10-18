@@ -3,7 +3,7 @@ package australchess.validator;
 import australchess.cli.Board;
 import australchess.piece.Move;
 
-public class RookFreeRoute implements FreeRoute {
+public class RookFreeRoute implements MovementValidator {
     @Override
     public boolean validate(Move move, Board board) {
 

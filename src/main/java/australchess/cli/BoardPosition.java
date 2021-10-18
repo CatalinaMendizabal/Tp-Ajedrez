@@ -3,7 +3,7 @@ package australchess.cli;
 import australchess.piece.Piece;
 
 
-public class BoardPosition {
+public  class BoardPosition {
     private Piece piece;
     private final Integer number;
     private final Character letter;
@@ -14,20 +14,11 @@ public class BoardPosition {
         this.letter = letter;
     }
 
-    public Piece getPiece() {
-        return piece;
-    }
+    public Piece getPiece() { return piece; }
 
-    public Integer getNumber() {
-        return number;
-    }
+    public void setPiece(Piece piece) { this.piece = piece; }
 
-    public Character getLetter() {
-        return letter;
-    }
+    public Integer getNumber() { return number; }
 
-    public void setPiece(Piece piece) {
-        this.piece = piece;
-    }
-
+    public Character getLetter() { return letter; }
 }

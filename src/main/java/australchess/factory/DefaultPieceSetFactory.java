@@ -4,7 +4,7 @@ import australchess.piece.*;
 
 public class DefaultPieceSetFactory implements PieceSetFactory {
     @Override
-    public Piece[] makePieceSet(PieceColor color) {
+    public Piece[] createPieceSet(PieceColor color) {
         Piece[] pieces = new Piece[16];
         for (int i = 0; i < pieces.length; i++) {
             if (i < 8) pieces[i] = new Pawn(color);

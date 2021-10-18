@@ -1,7 +1,7 @@
 package australchess.validator;
 
 import australchess.cli.Board;
-import australchess.cli.CheckDetector;
+import australchess.detector.CheckDetector;
 import australchess.piece.Move;
 import australchess.piece.Piece;
 
